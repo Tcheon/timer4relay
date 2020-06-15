@@ -1,0 +1,35 @@
+import RPi.GPIO as GPIO
+import datetime
+import time
+from time import sleep
+
+#  SETUP THE GPIO
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(17, GPIO.OUT)
+
+#  BLINK TEST
+GPIO.output(17, GPIO.LOW) #  turn on check
+time.sleep(3)
+GPIO.output(17, GPIO.HIGH) #  turn off check
+print("Good Check!")
+#TIME PRINT FOR TEST
+print(datetime.datetime.now().strftime("%H:%M"))
+
+#  TRACK TIME AND TURN ON THE GPIO
+while True:
+    now = datetime.datetime.now().strftime("%H:%M")
+    print(now) #  for teste mode
+    sleep(1)
+    if now == "20:25":#  Set here the time requested!
+        sleep0 = (30) #  18*60 hours X minutes
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
+        GPIO.setup(17, GPIO.OUT)
+        GPIO.output(17, GPIO.LOW) #  Turn on
+        print("Lights on!!")
+        sleep(sleep0)
+        GPIO.output(17, GPIO.HIGH) #Turn off
+        print("YEah baby")
+
+    GPIO.cleanup()
